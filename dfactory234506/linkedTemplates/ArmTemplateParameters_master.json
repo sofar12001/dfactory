@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "dfactory234506"
+		},
+		"appdb_service_connectionString": {
+			"value": ""
+		},
+		"appvmserver_password": {
+			"value": ""
+		},
+		"datalake245688_service_accountKey": {
+			"value": ""
+		},
+		"dataworkspace23dpool_service_connectionString": {
+			"value": ""
+		},
+		"appvmserver_properties_typeProperties_host": {
+			"value": "D:\\nginx-1.24.0\\nginx-1.24.0\\logs"
+		},
+		"appvmserver_properties_typeProperties_userId": {
+			"value": "appuser"
+		},
+		"datalake245688_service_properties_typeProperties_url": {
+			"value": "https://datalake245688.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

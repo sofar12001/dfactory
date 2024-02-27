@@ -1,0 +1,131 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "dfactory234506"
+		},
+		"appdb_service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'appdb_service'"
+		},
+		"appvmserver_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'appvmserver'"
+		},
+		"datalake245688_service_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalake245688_service'"
+		},
+		"dataworkspace23dpool_service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'dataworkspace23dpool_service'"
+		},
+		"appvmserver_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "D:\\nginx-1.24.0\\nginx-1.24.0\\logs"
+		},
+		"appvmserver_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "appuser"
+		},
+		"datalake245688_service_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake245688.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "dfactory234506_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"appdb_service_connectionString": {
+						"value": "[parameters('appdb_service_connectionString')]"
+					},
+					"datalake245688_service_accountKey": {
+						"value": "[parameters('datalake245688_service_accountKey')]"
+					},
+					"dataworkspace23dpool_service_connectionString": {
+						"value": "[parameters('dataworkspace23dpool_service_connectionString')]"
+					},
+					"datalake245688_service_properties_typeProperties_url": {
+						"value": "[parameters('datalake245688_service_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "dfactory234506_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"appvmserver_password": {
+						"value": "[parameters('appvmserver_password')]"
+					},
+					"appvmserver_properties_typeProperties_host": {
+						"value": "[parameters('appvmserver_properties_typeProperties_host')]"
+					},
+					"appvmserver_properties_typeProperties_userId": {
+						"value": "[parameters('appvmserver_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'dfactory234506_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "dfactory234506_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'dfactory234506_ArmTemplate_1')]"
+			]
+		}
+	]
+}
